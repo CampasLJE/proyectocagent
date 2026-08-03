@@ -1,0 +1,28 @@
+name: Agente de Mantenimiento Continuo
+
+on:
+  schedule:
+    - cron: '0 3 * * 0' # Todos los domingos a las 3:00 AM
+  workflow_dispatch:     # Permite ejecutarlo manualmente desde la pestaña Actions
+
+jobs:
+  mantenimiento:
+    name: Auditoria de Mejora Continua
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Agente cagent con Gemini
+        uses: docker/cagent-action@v1
+        with:
+          agent: .github/agent-maintainer.yaml
+          prompt: |
+            Realiza una auditoría completa del proyecto.
+            Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
+          google-api-key: ${{ secrets.GEMINI_API_KEY }}

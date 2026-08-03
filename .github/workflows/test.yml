@@ -41,11 +41,9 @@ jobs:
         run: pnpm biome ci .
 
       - name: Run actionlint
-        uses: raven-actions/actionlint@e01d1ea33dd6a5ed517d95b4c0c357560ac6f518 # v2.1.1
+        uses: raven-actions/actionlint@v2
         with:
           fail-on-error: true
-          # Disable shellcheck - it reports info/style warnings as errors
-          # We care about YAML structure and action syntax, not shell style
           shellcheck: false
 
   test:
@@ -100,6 +98,8 @@ jobs:
 
       - name: Setup credentials
         uses: ./setup-credentials
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         continue-on-error: true
 
       - name: Run integration tests
