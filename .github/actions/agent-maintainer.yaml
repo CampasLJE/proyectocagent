@@ -1,7 +1,7 @@
 version: "2"
 agents:
   root:
-    model: gemini/gemini-1.5-pro
+    model: google/gemini-2.0-flash
     description: "Agente enfocado en la auditoría de seguridad y calidad de código del repositorio."
     
     # 1. Herramientas necesarias para que el agente explore y lea el proyecto
