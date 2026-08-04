@@ -22,7 +22,7 @@ jobs:
 
       - name: Ejecutar Agente cagent con Anthropic
         id: auditoria
-        uses: docker/cagent-action@v0.1.0 # <--- Cambiado de @main a @v0.1.0
+        uses: docker/cagent-action@v1.19.4 # <--- Cambiado de @main a @v0.1.0
         with:
           agent: .github/actions/mention-reply/agent-maintainer.yml
           prompt: |
