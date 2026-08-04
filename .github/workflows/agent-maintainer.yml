@@ -1,9 +1,11 @@
 name: Agente de Mantenimiento Continuo
 
 on:
+  push:
+    branches: [main]     # <--- ESTO HARÁ QUE CORRA EN CADA PUSH A MAIN
   schedule:
-    - cron: '0 3 * * 0' # Todos los domingos a las 3:00 AM
-  workflow_dispatch:     # Permite ejecutarlo manualmente desde la pestaña Actions
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
 
 jobs:
   mantenimiento:
@@ -28,7 +30,6 @@ jobs:
             Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      # --- NUEVO PASO: Publicar el resultado como un Issue en GitHub ---
       - name: Crear Issue con Reporte de Auditoría
         if: always() && steps.auditoria.outputs.output-file != ''
         env:
