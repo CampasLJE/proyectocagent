@@ -3,7 +3,7 @@ name: Agente de Mantenimiento Continuo
 on:
   schedule:
     - cron: '0 3 * * 0' # Todos los domingos a las 3:00 AM
-  workflow_dispatch:     # Permite ejecutarlo manualmente desde Actions
+  workflow_dispatch:     # Permite ejecutarlo manualmente desde la pestaña Actions
 
 jobs:
   mantenimiento:
@@ -19,12 +19,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ejecutar Agente cagent con Anthropic
+        id: auditoria
         uses: docker/cagent-action@v1
         with:
-          # Ruta exacta donde tienes guardado el YAML de tu agente:
           agent: .github/actions/mention-reply/agent-maintainer.yml
           prompt: |
             Realiza una auditoría completa del proyecto.
             Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
-          # Usando el secreto tal cual lo registraste en GitHub:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      # --- NUEVO PASO: Publicar el resultado como un Issue en GitHub ---
+      - name: Crear Issue con Reporte de Auditoría
+        if: always() && steps.auditoria.outputs.output-file != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT_FILE: ${{ steps.auditoria.outputs.output-file }}
+        run: |
+          gh issue create \
+            --title "🛡️ Reporte de Auditoría Automática - $(date +'%Y-%m-%d')" \
+            --body-file "$OUTPUT_FILE"
