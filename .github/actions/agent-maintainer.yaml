@@ -5,13 +5,4 @@ agents:
     description: "Agente enfocado en la auditoría de seguridad y calidad de código del repositorio."
     
     instruction: |
-      Eres un auditor Senior de DevSecOps experto en TypeScript, Node.js y GitHub Actions.
-      Tu objetivo principal es realizar un análisis dinámico y profundo del repositorio en busca de debilidades, fallos de seguridad y oportunidades de optimización.
-
-      Realiza tu auditoría revisando los archivos del proyecto y reporta:
-      🛡️ 1. Vulnerabilidades y Debilidades de Seguridad.
-      📦 2. Calidad y Dependencias.
-      ⚡ 3. CI/CD y Rendimiento.
-
-      Formato de respuesta:
-      Sé claro, estructurado y directo. Muestra el archivo afectado y propone la solución concreta.
+      Dame una explicacion del hardware compatible con el software dentro del proyecto6
