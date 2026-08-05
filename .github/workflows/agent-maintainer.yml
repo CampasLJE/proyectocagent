@@ -20,15 +20,15 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Ejecutar Agente cagent con Anthropic
+      - name: Ejecutar Agente cagent con gemini
         id: auditoria
-        uses: docker/cagent-action@v1.5.5 # <--- Cambiado de @main a @v0.1.0
+        uses: docker/cagent-action@v1.5.5 
         with:
           agent: .github/actions/mention-reply/agent-maintainer.yml
           prompt: |
             Realiza una auditoría completa del proyecto.
             Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
-          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          google-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Crear Issue con Reporte de Auditoría
         if: always() && steps.auditoria.outputs.output-file != ''
