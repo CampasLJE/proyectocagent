@@ -22,7 +22,7 @@ jobs:
 
       - name: Ejecutar Agente cagent con gemini
         id: auditoria
-        uses: docker/cagent-action@v1
+        uses: docker/cagent-action@v1.5.5
         env:
           GEMINI_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
