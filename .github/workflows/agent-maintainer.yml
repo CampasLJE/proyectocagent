@@ -24,7 +24,7 @@ jobs:
         id: auditoria
         uses: docker/cagent-action@v1.5.5 
         with:
-          agent: .github/actions/mention-reply/agent-maintainer.yaml
+          agent: .github/actions/agent-maintainer.yaml
           prompt: |
             Realiza una auditoría completa del proyecto.
             Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
