@@ -1,7 +1,7 @@
 version: "2"
 agents:
   root:
-    model: gemini-2.0-flash   # <--- Sin el prefijo google/
+    model: gemini/gemini-2.0-flash   # <--- Sin el prefijo google/
     description: "Agente enfocado en la auditoría de seguridad y calidad de código del repositorio."
     
     instruction: |
