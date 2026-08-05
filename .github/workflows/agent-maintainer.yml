@@ -23,12 +23,14 @@ jobs:
       - name: Ejecutar Agente cagent con gemini
         id: auditoria
         uses: docker/cagent-action@v1.5.5 
+        env:
+          GEMINI_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         with:
           agent: .github/actions/agent-maintainer.yaml
           prompt: |
             Realiza una auditoría completa del proyecto.
             Analiza el package.json raíz, los workflows y la estructura general para sugerir optimizaciones.
-          google-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Crear Issue con Reporte de Auditoría
         if: always() && steps.auditoria.outputs.output-file != ''
